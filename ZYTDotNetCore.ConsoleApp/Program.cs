@@ -8,7 +8,7 @@ namespace ZYTDotNetCore.ConsoleApp
         static void Main(string[] args)
         {
             ADO_DOT_NET adoDotNet = new ADO_DOT_NET();
-            adoDotNet.Update();
+            adoDotNet.Delete();
         }
     }
 }

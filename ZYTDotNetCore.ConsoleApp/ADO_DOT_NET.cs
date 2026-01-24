@@ -181,5 +181,21 @@ namespace ZYTDotNetCore.ConsoleApp
 
             Console.WriteLine(recordCount == 1 ? "Record updated successful" : "Record updated fail");
         }
+        public void Delete()
+        {
+            Console.WriteLine("Enter Blog Id:");
+            string blogId = Console.ReadLine();
+
+            SqlConnection conn = new SqlConnection(_connectionString);
+            conn.Open();
+            string deleteQuery = @"DELETE FROM [dbo].[TBL_BLOG]
+                                    WHERE BlogId = @BlogId";
+            SqlCommand cmd = new SqlCommand(deleteQuery,conn);
+            cmd.Parameters.AddWithValue("@BlogId",blogId);
+            int recordCount = cmd.ExecuteNonQuery();
+            conn.Close();
+
+            Console.WriteLine(recordCount == 1 ? "Record deleted successful" : "Record deleted fail");
+        }
     }
 }

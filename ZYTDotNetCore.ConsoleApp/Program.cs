@@ -11,8 +11,10 @@ namespace ZYTDotNetCore.ConsoleApp
             //adoDotNet.Delete();
             DAPPER dapper = new DAPPER();
             //dapper.CREATE("B012520","ThetP","Testing...");
-            dapper.Edit(1);
-            dapper.Edit(100);
+            //dapper.Edit(1);
+            //dapper.Edit(100);
+            //dapper.UPDATE(7,"B012610","xxx","Update Testing...");
+            dapper.DELETE(7);
         }
     }
 }

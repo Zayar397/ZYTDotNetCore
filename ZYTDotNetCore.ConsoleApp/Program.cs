@@ -18,7 +18,9 @@ namespace ZYTDotNetCore.ConsoleApp
             EFCORE efCore = new EFCORE();
             //efCore.READ();
             //efCore.CREATE("A012910","Yoon Waddy","Testing...");
-            efCore.EDIT(1006);
+            //efCore.EDIT(1006);
+            //efCore.UPDATE(1006,"A0131","YOON","Updated...");
+            efCore.DELETE(1006);
         }
     }
 }

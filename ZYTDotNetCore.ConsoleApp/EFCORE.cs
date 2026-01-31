@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.EntityFrameworkCore;
 using ZYTDotNetCore.ConsoleApp.Models;
 
 namespace ZYTDotNetCore.ConsoleApp
@@ -51,6 +52,50 @@ namespace ZYTDotNetCore.ConsoleApp
             Console.WriteLine("Blog Author: " + item.BlogAuthor);
             Console.WriteLine("Blog Content: " + item.BlogContent);
             Console.WriteLine();
+        }
+        public void UPDATE(int blogId, string blogTitle, string blogAuthor, string blogContent)
+        {
+            DotNetTrainingBatch5DbContext db = new DotNetTrainingBatch5DbContext();
+            var item = db.Blogs.
+                        AsNoTracking().
+                        FirstOrDefault(x => x.BlogId == blogId);
+            if (item == null)
+            {
+                Console.WriteLine("No data found.");
+                return;
+            }
+            if (!string.IsNullOrEmpty(blogTitle))
+            {
+                item.BlogTitle = blogTitle;
+            }
+            if (!string.IsNullOrEmpty(blogAuthor))
+            {
+                item.BlogAuthor = blogAuthor;
+            }
+            if (!string.IsNullOrEmpty(blogContent))
+            {
+                item.BlogContent = blogContent;
+            }
+            db.Entry(item).State = EntityState.Modified;
+            int recordCount = db.SaveChanges();
+            Console.WriteLine(recordCount == 1 ? "Record updated successful" : "Record updated fail");
+ 
+        }
+        public void DELETE(int blogId)
+        {
+            DotNetTrainingBatch5DbContext db = new DotNetTrainingBatch5DbContext();
+            var item = db.Blogs
+                        .AsNoTracking()
+                        .FirstOrDefault(x => x.BlogId == blogId);
+            if (item == null)
+            {
+                Console.WriteLine("No data found.");
+                return;
+            }
+            db.Entry(item).State = EntityState.Deleted;
+            int recordCount = db.SaveChanges();
+            Console.WriteLine(recordCount == 1 ? "Record deleted successful" : "Record deleted fail");
+
         }
     }
 }

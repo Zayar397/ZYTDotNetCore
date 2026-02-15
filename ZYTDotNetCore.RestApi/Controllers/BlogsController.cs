@@ -47,7 +47,7 @@ namespace ZYTDotNetCore.RestApi.Controllers
             return Ok(new {Message = "Record Updated Successfully. "+blogList});
         }
         [HttpPatch("{blogId}")]
-        public IActionResult PatchBlogs(int blogId, TblBlog blog)
+        public IActionResult PatchBlogs(int blogId,TblBlog blog)
         {
             var blogList = _db.TblBlogs.AsNoTracking().FirstOrDefault(x => x.BlogId == blogId);
             if (blogList is null)
@@ -68,7 +68,7 @@ namespace ZYTDotNetCore.RestApi.Controllers
             }
             _db.Entry(blogList).State = EntityState.Modified;
             _db.SaveChanges();
-            return Ok(new { Message = "Record Updated Successfully(Patch)." });
+            return Ok(blogList);
         }
         [HttpDelete("{blogId}")]
         public IActionResult DeleteBlogs(int blogId)
@@ -81,7 +81,7 @@ namespace ZYTDotNetCore.RestApi.Controllers
             blogList.DeleteFlage = true;
             _db.Entry(blogList).State = EntityState.Modified;
             _db.SaveChanges();
-            return Ok(new {Message = "Record deleted successfully."});
+            return Ok(new { Message = "Record deleted successfully." });
         }
     }
 }

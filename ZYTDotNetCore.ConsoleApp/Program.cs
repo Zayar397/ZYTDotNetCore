@@ -22,7 +22,7 @@ namespace ZYTDotNetCore.ConsoleApp
             //efCore.UPDATE(1006,"A0131","YOON","Updated...");
             //efCore.DELETE(1006);
             ADO_DOT_NET_2 adoDotNet_2 = new ADO_DOT_NET_2();
-            adoDotNet_2.Edit();
+            adoDotNet_2.Delete();
         }
     }
 }

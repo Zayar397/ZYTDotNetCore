@@ -90,5 +90,46 @@ namespace ZYTDotNetCore.ConsoleApp
             Console.WriteLine(result == 1 ? "Record inserted successful" : "Record inserted fail");
 
         }
+        public void Update()
+        {
+            Console.WriteLine("Enter Blog Id:");
+            string blogId = Console.ReadLine();
+
+            Console.WriteLine("Enter Title:");
+            string title = Console.ReadLine();
+
+            Console.WriteLine("Enter Author:");
+            string author = Console.ReadLine();
+
+            Console.WriteLine("Enter Content:");
+            string content = Console.ReadLine();
+
+            string updateQuery = @"UPDATE [dbo].[TBL_BLOG]
+                                       SET [BlogTitle] = @BlogTitle
+                                          ,[BlogAuthor] = @BlogAuthor
+                                          ,[BlogContent] = @BlogContent
+                                          ,[DeleteFlage] = 0
+                                     WHERE BlogId = @BlogID";
+            int recordCount = _adoDotNetService.Execute(  updateQuery,
+                                        new SqlParameterModel("@BlogTitle",title),
+                                        new SqlParameterModel("@BlogAuthor", author),
+                                        new SqlParameterModel("@BlogContent", content),
+                                        new SqlParameterModel("@BlogID", blogId)
+                                     );
+            Console.WriteLine(recordCount == 1 ? "Record updated successful" : "Record updated fail");
+        }
+        public void Delete()
+        {
+            Console.WriteLine("Enter Blog Id:");
+            string blogId = Console.ReadLine();
+
+            string deleteQuery = @"UPDATE [dbo].[TBL_BLOG]
+                                       SET [DeleteFlage] = 0
+                                     WHERE BlogId = @BlogID";
+            int recordCount = _adoDotNetService.Execute(  deleteQuery,
+                                        new SqlParameterModel("@BlogID",blogId)
+                                      );
+            Console.WriteLine(recordCount == 1 ? "Record deleted successful" : "Record deleted fail");
+        }
     }
 }

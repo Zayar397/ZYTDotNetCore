@@ -15,12 +15,14 @@ namespace ZYTDotNetCore.ConsoleApp
             //dapper.Edit(100);
             //dapper.UPDATE(7,"B012610","xxx","Update Testing...");
             //dapper.DELETE(7);
-            EFCORE efCore = new EFCORE();
+            //EFCORE efCore = new EFCORE();
             //efCore.READ();
             //efCore.CREATE("A012910","Yoon Waddy","Testing...");
             //efCore.EDIT(1006);
             //efCore.UPDATE(1006,"A0131","YOON","Updated...");
-            efCore.DELETE(1006);
+            //efCore.DELETE(1006);
+            ADO_DOT_NET_2 adoDotNet_2 = new ADO_DOT_NET_2();
+            adoDotNet_2.Edit();
         }
     }
 }

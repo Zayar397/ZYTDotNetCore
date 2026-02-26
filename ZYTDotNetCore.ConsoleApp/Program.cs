@@ -24,7 +24,7 @@ namespace ZYTDotNetCore.ConsoleApp
             //ADO_DOT_NET_2 adoDotNet_2 = new ADO_DOT_NET_2();
             //adoDotNet_2.Delete();
             DAPPER_2 dapper_2 = new DAPPER_2();
-            dapper_2.Create("Dapper with Service","Iris","MU 2016");
+            dapper_2.DELETE(1010);
         }
     }
 }

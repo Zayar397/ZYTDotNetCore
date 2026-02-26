@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 using ZYTDotNetCore.ConsoleApp.Models;
 using ZYTDotNetCore.Shared;
 
@@ -67,6 +69,34 @@ namespace ZYTDotNetCore.ConsoleApp
                 BlogContent = content,
             });
             Console.WriteLine(recordCount == 1 ? "Record inserted successful" : "Record inserted fail");
+        }
+        public void UPDATE(int blogId, string blogTitle, string blogAuthor, string blogContent)
+        {
+            string updateQuery = @"UPDATE [dbo].[TBL_BLOG]
+                                       SET [BlogTitle] = @BlogTitle
+                                          ,[BlogAuthor] = @BlogAuthor
+                                          ,[BlogContent] = @BlogContent
+                                          ,[DeleteFlage] = 0
+                                     WHERE BlogId = @BlogId";
+            int recordCount = _dapperService.Execute(updateQuery, new BlogDataModel
+            {
+                BlogTitle = blogTitle,
+                BlogAuthor = blogAuthor,
+                BlogContent = blogContent,
+                BlogId = blogId
+            });
+            Console.WriteLine(recordCount == 1 ? "Record updated successful" : "Record updated fail");
+        }
+        public void DELETE(int blogId)
+        {
+            string deleteQuery = @"UPDATE [dbo].[TBL_BLOG]
+                                       SET [DeleteFlage] = 0
+                                     WHERE BlogId = @BlogId";
+            int recordCount = _dapperService.Execute(deleteQuery, new BlogDataModel
+            {
+                BlogId = blogId
+            });
+            Console.WriteLine(recordCount == 1 ? "Record deleted successful" : "Record deleted fail");
         }
     }
 }

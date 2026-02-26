@@ -21,8 +21,10 @@ namespace ZYTDotNetCore.ConsoleApp
             //efCore.EDIT(1006);
             //efCore.UPDATE(1006,"A0131","YOON","Updated...");
             //efCore.DELETE(1006);
-            ADO_DOT_NET_2 adoDotNet_2 = new ADO_DOT_NET_2();
-            adoDotNet_2.Delete();
+            //ADO_DOT_NET_2 adoDotNet_2 = new ADO_DOT_NET_2();
+            //adoDotNet_2.Delete();
+            DAPPER_2 dapper_2 = new DAPPER_2();
+            dapper_2.Create("Dapper with Service","Iris","MU 2016");
         }
     }
 }

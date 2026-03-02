@@ -21,7 +21,7 @@ namespace ZYTDotNetCore.ConsoleApp
         public void Read()
         {
             string selectQuery = "Select * from TBL_BLOG where DeleteFlage = 0";
-            var list = _dapperService.Query<BlogDataModel>(selectQuery).ToList();
+            var list = _dapperService.Query<BlogDataModel>(selectQuery);
             foreach (var item in list)
             {
                 Console.WriteLine("Blog ID: " + item.BlogId);

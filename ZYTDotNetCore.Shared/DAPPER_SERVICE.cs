@@ -29,7 +29,8 @@ namespace ZYTDotNetCore.Shared
         {
             using(IDbConnection db = new SqlConnection(_connectionString))
             {
-                var item = db.QueryFirstOrDefault<T>(query,param);
+                //var item = db.QueryFirstOrDefault<T>(query,param);
+                var item = db.Query<T>(query, param).FirstOrDefault();
                 return item;
             }
         }

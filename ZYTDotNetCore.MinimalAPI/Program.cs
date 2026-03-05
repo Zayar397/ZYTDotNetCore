@@ -1,6 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using ZYTDotNetCore.Database.Models;
-using ZYTDotNetCore.MinimalAPI.Endpoints.Blog;
+//using Microsoft.EntityFrameworkCore;
+//using ZYTDotNetCore.Database.Models;
+//using ZYTDotNetCore.MinimalAPI.Endpoints.Blog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -135,7 +135,7 @@ var summaries = new[]
 //})
 //.WithName("DeleteBlogs")
 //.WithOpenApi();
-app.MapBlogEndpoint();
+app.UseBlogEndpoint();
 app.Run();
 
 //BLOG_ENDPOINT.Test(9);

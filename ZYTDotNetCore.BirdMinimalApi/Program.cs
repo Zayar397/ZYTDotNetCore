@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +65,103 @@ app.MapGet("/birds/{id}", (int id) =>
 .WithName("GetBirdById")
 .WithOpenApi();
 
+app.MapPost("/birds", (BirdModel birdModel) =>
+{
+    string folderPath = "Data\\Birds.json";
+    string birdJson = File.ReadAllText(folderPath);
+    var birdObj = JsonConvert.DeserializeObject<BirdResponseModel>(birdJson);
+
+    birdModel.Id = birdObj.Tbl_Bird.Count == 0 ? 1 : birdObj.Tbl_Bird.Max(x => x.Id)+1;
+    birdObj.Tbl_Bird.Add(birdModel);
+
+    string birdJson_2 = JsonConvert.SerializeObject(birdObj);
+    File.WriteAllText(folderPath, birdJson_2);
+
+    return Results.Ok("Record inserted successfully.");
+})
+.WithName("InsertBirds")
+.WithOpenApi();
+
+app.MapPut("/birds/{id}", (int id, BirdModel birdModel) =>
+{
+    string folderPath = "Data\\Birds.json";
+    string birdJson = File.ReadAllText(folderPath);
+    var birdObj = JsonConvert.DeserializeObject<BirdResponseModel>(birdJson);
+
+    var item = birdObj.Tbl_Bird.FirstOrDefault(x => x.Id == id);
+    if (item is null)
+    {
+        return Results.BadRequest("No data found.");
+    }
+    item.BirdMyanmarName = birdModel.BirdMyanmarName;
+    item.BirdEnglishName = birdModel.BirdEnglishName;
+    item.Description = birdModel.Description;
+    item.ImagePath = birdModel.ImagePath;
+
+    string birdJson_2 = JsonConvert.SerializeObject(birdObj,Formatting.Indented);
+    File.WriteAllText(folderPath, birdJson_2);
+
+    return Results.Ok("Record updated successfully.");
+})
+    .WithName("UpdateBirdsWithPut")
+    .WithOpenApi();
+
+app.MapPatch("/bird/{id}", (int id,BirdModel requestModel) =>
+{
+    string folderPath = "Data\\Birds.json";
+    string birdJson = File.ReadAllText(folderPath);
+    var birdObj = JsonConvert.DeserializeObject<BirdResponseModel>(birdJson);
+
+    var item = birdObj.Tbl_Bird.FirstOrDefault(x => x.Id == id);
+    if (item is null)
+    {
+        return Results.BadRequest("No data found.");
+    }
+    if (requestModel.BirdMyanmarName is not null)
+    {
+        item.BirdMyanmarName = requestModel.BirdMyanmarName;
+    }
+    if (requestModel.BirdEnglishName is not null)
+    {
+        item.BirdEnglishName = requestModel.BirdEnglishName;
+    }
+    if (requestModel.Description is not null)
+    {
+        item.Description = requestModel.Description;
+    }
+    if (requestModel.ImagePath is not null)
+    {
+        item.ImagePath = requestModel.ImagePath;
+    }
+
+    string birdJson_2 = JsonConvert.SerializeObject(birdObj, Formatting.Indented);
+    File.WriteAllText(folderPath,birdJson_2);
+    return Results.Ok("Record updated successfully.");
+})
+    .WithName("UpdateBirdsWithPatch")
+    .WithOpenApi();
+
+app.MapDelete("/birds/{id}", (int id) =>
+ {
+     string folderPath = "Data\\Birds.json";
+     string birdJson = File.ReadAllText(folderPath);
+     var birdObj = JsonConvert.DeserializeObject<BirdResponseModel>(birdJson);
+
+     var item = birdObj.Tbl_Bird.FirstOrDefault(x => x.Id == id);
+     if (item is null)
+     {
+         return Results.BadRequest("No data found.");
+     }
+     birdObj.Tbl_Bird.Remove(item);
+
+     string birdJson_2 = JsonConvert.SerializeObject(birdObj, Formatting.Indented);
+     File.WriteAllText(folderPath, birdJson_2);
+
+     return Results.Ok("Record deleted successfully.");
+ })
+.WithName("DeleteBirds")
+.WithOpenApi();
+
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
@@ -75,7 +172,7 @@ internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary
 
 public class BirdResponseModel
 {
-    public BirdModel[] Tbl_Bird { get; set; }
+    public List<BirdModel> Tbl_Bird { get; set; }
 }
 
 public class BirdModel

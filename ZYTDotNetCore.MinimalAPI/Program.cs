@@ -135,7 +135,7 @@ var summaries = new[]
 //})
 //.WithName("DeleteBlogs")
 //.WithOpenApi();
-app.UseBlogEndpoint();
+app.UseBlogServiceEndpoint();
 app.Run();
 
 //BLOG_ENDPOINT.Test(9);

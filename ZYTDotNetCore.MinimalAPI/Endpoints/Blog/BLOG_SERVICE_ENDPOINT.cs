@@ -4,7 +4,7 @@ namespace ZYTDotNetCore.MinimalAPI.Endpoints.Blog
 {
     public static class BLOG_SERVICE_ENDPOINT
     {
-        public static void UseBlogEndpoint(this IEndpointRouteBuilder app)
+        public static void UseBlogServiceEndpoint(this IEndpointRouteBuilder app)
         {
             app.MapGet("/blogs", () =>
             {
@@ -16,10 +16,8 @@ namespace ZYTDotNetCore.MinimalAPI.Endpoints.Blog
     .WithOpenApi();
             app.MapGet("/blogs/{id}", (int id) =>
             {
-                AppDbContext db = new AppDbContext();
-                var item = db.TblBlogs
-                                .AsNoTracking()
-                                .FirstOrDefault(x => x.BlogId == id);
+                BLOG_SERVICE blogService = new BLOG_SERVICE();
+                var item = blogService.GetBlogById(id);
                 if (item is null)
                 {
                     return Results.BadRequest("Data not found");
@@ -30,74 +28,34 @@ namespace ZYTDotNetCore.MinimalAPI.Endpoints.Blog
              .WithOpenApi();
             app.MapPost("/blogs", (TblBlog blog) =>
             {
-                AppDbContext db = new AppDbContext();
-                db.TblBlogs.Add(blog);
-                db.SaveChanges();
-                return Results.Ok("Record inserted successfully.");
+                BLOG_SERVICE blogService = new BLOG_SERVICE();
+                bool isOk = blogService.CreateBlog(blog);
+                return Results.Ok(isOk == true ? "Successed to insert record." : "Failed to insert record.");
             })
             .WithName("CreateBlogs")
             .WithOpenApi();
             app.MapPut("/blogs/{id}", (int id, TblBlog blog) =>
             {
-                AppDbContext db = new AppDbContext();
-                var item = db.TblBlogs
-                                .AsNoTracking()
-                                .FirstOrDefault(x => x.BlogId == id);
-                if (item is null)
-                {
-                    return Results.BadRequest("Data not found.");
-                }
-                item.BlogTitle = blog.BlogTitle;
-                item.BlogAuthor = blog.BlogAuthor;
-                item.BlogContent = blog.BlogContent;
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-                return Results.Ok("Record updated successfully.");
+                BLOG_SERVICE blogService = new BLOG_SERVICE();
+                bool isOk = blogService.UpdateBlog(id, blog);
+                
+                return Results.Ok(isOk == true ? "Successed to update record." : "Failed to update record.");
             })
             .WithName("UpdateBlogs")
             .WithOpenApi();
             app.MapPatch("/blogs/{id}", (TblBlog blog, int id) =>
             {
-                AppDbContext db = new AppDbContext();
-                var item = db.TblBlogs
-                                .AsNoTracking()
-                                .FirstOrDefault(x => x.BlogId == id);
-                if (item is null)
-                {
-                    return Results.BadRequest("Data not found.");
-                }
-                if (blog.BlogTitle is not null)
-                {
-                    item.BlogTitle = blog.BlogTitle;
-                }
-                if (blog.BlogAuthor is not null)
-                {
-                    item.BlogAuthor = blog.BlogAuthor;
-                }
-                if (blog.BlogContent is not null)
-                {
-                    item.BlogContent = blog.BlogContent;
-                }
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-                return Results.Ok("Record updated successfully.");
+                BLOG_SERVICE blogService = new BLOG_SERVICE();
+                bool isOk = blogService.UpdateBlogWithPatch(id, blog);
+                return Results.Ok(isOk == true ? "Successed to update record." : "Failed to update record.");
             })
                 .WithName("PatchBlogs")
                 .WithOpenApi();
             app.MapDelete("/blogs/{id}", (int id) =>
             {
-                AppDbContext db = new AppDbContext();
-                var item = db.TblBlogs
-                                .AsNoTracking()
-                                .FirstOrDefault(x => x.BlogId == id);
-                if (item is null)
-                {
-                    return Results.BadRequest("Data not found.");
-                }
-                item.DeleteFlage = true;
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-                return Results.Ok("Record deleted successfully.");
+                BLOG_SERVICE blogService = new BLOG_SERVICE();
+                bool isOk = blogService.DeleteBlog(id);
+                return Results.Ok(isOk == true ? "Successed to delete record." : "Failed to delete record.");
             })
             .WithName("DeleteBlogs")
             .WithOpenApi();

@@ -10,19 +10,23 @@ public partial class AppDbContext : DbContext
     {
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public AppDbContext(DbContextOptions options) : base(options)
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            string connectionString = "Data Source = DESKTOP-BPF6HTF\\SQL2022; Initial Catalog = DotNetTrainingBatch5; User Id = sa; Password = p@ssw0rd; Trust Server Certificate = True;";
-            optionsBuilder.UseSqlServer(connectionString);
-        }
-    }
+    //public AppDbContext(DbContextOptions<AppDbContext> options)
+    //    : base(options)
+    //{
+    //}
+
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (!optionsBuilder.IsConfigured)
+    //    {
+    //        string connectionString = "Data Source = DESKTOP-BPF6HTF\\SQL2022; Initial Catalog = DotNetTrainingBatch5; User Id = sa; Password = p@ssw0rd; Trust Server Certificate = True;";
+    //        optionsBuilder.UseSqlServer(connectionString);
+    //    }
+    //}
     public virtual DbSet<TblBlog> TblBlogs { get; set; }
 
     //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

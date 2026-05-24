@@ -6,9 +6,9 @@ namespace ZYTDotNetCore.Database.Models;
 
 public partial class AppDbContext : DbContext
 {
-    public AppDbContext()
-    {
-    }
+    //public AppDbContext()
+    //{
+    //}
 
     public AppDbContext(DbContextOptions options) : base(options)
     {

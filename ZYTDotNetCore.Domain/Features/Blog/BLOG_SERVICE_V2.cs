@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ZYTDotNetCore.Database.Models;
 
 namespace ZYTDotNetCore.Domain.Features.Blog
 {
-    public class BLOG_SERVICE : IBLOG_SERVICE
+    public class BLOG_SERVICE_V2 : IBLOG_SERVICE
     {
         //private readonly AppDbContext _db = new AppDbContext();
         private readonly AppDbContext _db;
-
-        public BLOG_SERVICE(AppDbContext db)
+        public BLOG_SERVICE_V2(AppDbContext db)
         {
             _db = db;
         }

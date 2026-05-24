@@ -1,23 +1,25 @@
 ﻿//using Microsoft.EntityFrameworkCore;
 //using ZYTDotNetCore.Database.Models;
 
+using Microsoft.AspNetCore.Mvc;
+
 namespace ZYTDotNetCore.MinimalAPI.Endpoints.Blog;
 
 public static class BLOG_ENDPOINT
 {
     public static void UseBlogEndpoint(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/blogs", () =>
+        app.MapGet("/blogs", ([FromServices] AppDbContext db) =>
         {
-            AppDbContext db = new AppDbContext();
+            //AppDbContext db = new AppDbContext();
             var item = db.TblBlogs.AsNoTracking().ToList();
             return Results.Ok(item);
         })
 .WithName("GetBlogs")
 .WithOpenApi();
-        app.MapGet("/blogs/{id}", (int id) =>
+        app.MapGet("/blogs/{id}", ([FromServices] AppDbContext db, int id) =>
         {
-            AppDbContext db = new AppDbContext();
+            //AppDbContext db = new AppDbContext();
             var item = db.TblBlogs
                             .AsNoTracking()
                             .FirstOrDefault(x => x.BlogId == id);
@@ -29,18 +31,18 @@ public static class BLOG_ENDPOINT
         })
          .WithName("GetBlogsById")
          .WithOpenApi();
-        app.MapPost("/blogs", (TblBlog blog) =>
+        app.MapPost("/blogs", ([FromServices] AppDbContext db, TblBlog blog) =>
         {
-            AppDbContext db = new AppDbContext();
+            //AppDbContext db = new AppDbContext();
             db.TblBlogs.Add(blog);
             db.SaveChanges();
             return Results.Ok("Record inserted successfully.");
         })
         .WithName("CreateBlogs")
         .WithOpenApi();
-        app.MapPut("/blogs/{id}", (int id, TblBlog blog) =>
+        app.MapPut("/blogs/{id}", ([FromServices] AppDbContext db, int id, TblBlog blog) =>
         {
-            AppDbContext db = new AppDbContext();
+            //AppDbContext db = new AppDbContext();
             var item = db.TblBlogs
                             .AsNoTracking()
                             .FirstOrDefault(x => x.BlogId == id);
@@ -57,9 +59,9 @@ public static class BLOG_ENDPOINT
         })
         .WithName("UpdateBlogs")
         .WithOpenApi();
-        app.MapPatch("/blogs/{id}", (TblBlog blog, int id) =>
+        app.MapPatch("/blogs/{id}", ([FromServices] AppDbContext db, TblBlog blog, int id) =>
         {
-            AppDbContext db = new AppDbContext();
+            //AppDbContext db = new AppDbContext();
             var item = db.TblBlogs
                             .AsNoTracking()
                             .FirstOrDefault(x => x.BlogId == id);
@@ -85,9 +87,9 @@ public static class BLOG_ENDPOINT
         })
             .WithName("PatchBlogs")
             .WithOpenApi();
-        app.MapDelete("/blogs/{id}", (int id) =>
+        app.MapDelete("/blogs/{id}", ([FromServices] AppDbContext db, int id) =>
         {
-            AppDbContext db = new AppDbContext();
+            //AppDbContext db = new AppDbContext();
             var item = db.TblBlogs
                             .AsNoTracking()
                             .FirstOrDefault(x => x.BlogId == id);

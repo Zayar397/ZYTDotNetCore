@@ -10,21 +10,24 @@ namespace ZYTDotNetCore.RestApi.Controllers
     [ApiController]
     public class BLOG_SERVICE_CONTROLLER : ControllerBase
     {
-        private readonly BLOG_SERVICE blogService;
-        public BLOG_SERVICE_CONTROLLER()
+        private readonly IBLOG_SERVICE _blogService;
+
+        public BLOG_SERVICE_CONTROLLER(IBLOG_SERVICE blogService)
         {
-            blogService = new BLOG_SERVICE();
+            _blogService = blogService;
         }
+
+
         [HttpGet]
         public IActionResult GetBlogs()
         {
-            var blogList = blogService.GetBlogs();
+            var blogList = _blogService.GetBlogs();
             return Ok(blogList);
         }
         [HttpGet("{blogId}")]
         public IActionResult GetBlogs(int blogId)
         {
-            var blogItem = blogService.GetBlogById(blogId);
+            var blogItem = _blogService.GetBlogById(blogId);
             if (blogItem is null)
             {
                 return NotFound();
@@ -34,25 +37,25 @@ namespace ZYTDotNetCore.RestApi.Controllers
         [HttpPost]
         public IActionResult CreateBlogs(TblBlog blog)
         {
-            bool isSuccess = blogService.CreateBlog(blog);
+            bool isSuccess = _blogService.CreateBlog(blog);
             return Ok(isSuccess == true ? "Successed to insert record." : "Failed to insert record.");
         }
         [HttpPut("{blogId}")]
         public IActionResult UpdateBlogs(int blogId, TblBlog blog)
         {
-            bool isSuccess = blogService.UpdateBlog(blogId, blog);
+            bool isSuccess = _blogService.UpdateBlog(blogId, blog);
             return Ok(isSuccess == true ? "Successed to update record." : "Failed to update record.");
         }
         [HttpPatch("{blogId}")]
         public IActionResult PatchBlogs(int blogId, TblBlog blog)
         {
-            bool isSuccess = blogService.UpdateBlogWithPatch(blogId, blog);
+            bool isSuccess = _blogService.UpdateBlogWithPatch(blogId, blog);
             return Ok(isSuccess == true ? "Successed to update record with patch." : "Failed to update record with patch.");
         }
         [HttpDelete("{blogId}")]
         public IActionResult DeleteBlogs(int blogId)
         {
-            bool isSuccess = blogService.DeleteBlog(blogId);
+            bool isSuccess = _blogService.DeleteBlog(blogId);
             return Ok(isSuccess == true ? "Successed to delete record." : "Failed to delete record.");
         }
     }

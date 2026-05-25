@@ -10,7 +10,7 @@ namespace ZYTDotNetCore.ConsoleApp
 {
     public class ADO_DOT_NET
     {
-        private readonly string _connectionString = "Data Source = DESKTOP-BPF6HTF\\SQL2022; Initial Catalog = DotNetTrainingBatch5; User Id = sa; Password = p@ssw0rd;";
+        private readonly string _connectionString = APP_SETTINGS._connection;
         public void Read()
         {
             //string connStr = "Data Source = DESKTOP-BPF6HTF\\SQL2022; Initial Catalog = DotNetTrainingBatch5; User Id = sa; Password = p@ssw0rd;";

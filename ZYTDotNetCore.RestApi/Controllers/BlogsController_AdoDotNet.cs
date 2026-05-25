@@ -11,7 +11,14 @@ namespace ZYTDotNetCore.RestApi.Controllers
     [ApiController]
     public class BlogsController_AdoDotNet : ControllerBase
     {
-        private readonly string _connectionString = "Data Source = DESKTOP-BPF6HTF\\SQL2022; Initial Catalog = DotNetTrainingBatch5; User Id = sa; Password = p@ssw0rd; TrustServerCertificate = True;";
+        //private readonly string _connectionString = "Data Source = DESKTOP-BPF6HTF\\SQL2022; Initial Catalog = DotNetTrainingBatch5; User Id = sa; Password = p@ssw0rd; TrustServerCertificate = True;";
+        private readonly string _connectionString;
+
+        public BlogsController_AdoDotNet(IConfiguration config)
+        {
+            _connectionString = config.GetConnectionString("DbConnection")!;
+        }
+
         [HttpGet]
         public IActionResult GetBlogs()
         {

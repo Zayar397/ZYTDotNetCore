@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ZYTDotNetCore.ConsoleApp
 {
@@ -23,8 +24,11 @@ namespace ZYTDotNetCore.ConsoleApp
             //efCore.DELETE(1006);
             //ADO_DOT_NET_2 adoDotNet_2 = new ADO_DOT_NET_2();
             //adoDotNet_2.Delete();
-            DAPPER_2 dapper_2 = new DAPPER_2();
-            dapper_2.Edit(1010);
+            //DAPPER_2 dapper_2 = new DAPPER_2();
+            //dapper_2.Edit(1010);
+            var services =  new ServiceCollection().AddSingleton<ADO_DOT_NET>().BuildServiceProvider();
+            var adoDotNet = services.GetRequiredService<ADO_DOT_NET>();
+            adoDotNet.Read();
         }
     }
 }

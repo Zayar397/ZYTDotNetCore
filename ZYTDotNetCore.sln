@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.Domain", "ZYT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.ConsoleApp1", "ZYTDotNetCore.ConsoleApp1\ZYTDotNetCore.ConsoleApp1.csproj", "{B5794306-FB52-4B7B-B242-F32670835BEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.REST_API_2", "ZYTDotNetCore.REST_API_2\ZYTDotNetCore.REST_API_2.csproj", "{2382CCDC-3AEB-4018-8CCC-153581C07A34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{B5794306-FB52-4B7B-B242-F32670835BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5794306-FB52-4B7B-B242-F32670835BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5794306-FB52-4B7B-B242-F32670835BEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

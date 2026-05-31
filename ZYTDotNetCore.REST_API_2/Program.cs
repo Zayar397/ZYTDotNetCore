@@ -1,6 +1,9 @@
 //using ZYTDotNetCore.ConsoleApp1;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Refit;
+using RestSharp;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,10 @@ builder.Services.AddSingleton(n => new HttpClient()
 {
     BaseAddress = new Uri(builder.Configuration.GetSection("ApiDomainUrl").Value!)
 });
+builder.Services.AddSingleton(n => new RestClient(builder.Configuration.GetSection("ApiDomainUrl").Value!));
+builder.Services
+    .AddRefitClient<ISnakeApi>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(builder.Configuration.GetSection("ApiDomainUrl").Value!));
 
 
 var app = builder.Build();
@@ -45,12 +52,46 @@ app.UseHttpsRedirection();
 //.WithName("GetWeatherForecast")
 //.WithOpenApi();
 
-app.Run();
+
 app.MapGet("/birds", async ([FromServices] HttpClient httpClient) =>
 {
     var response = await httpClient.GetAsync("birds");
+    return await response.Content.ReadAsStringAsync();
+});
+
+app.MapGet("/art-gallery", async ([FromServices] RestClient restClient) =>
+{
+    RestRequest restRequest = new RestRequest("art-gallery");
+    var response = await restClient.GetAsync(restRequest);
+    return response.Content;
+});
+
+app.MapGet("/snakes", async ([FromServices] ISnakeApi snakeApi) =>
+{
+    var response = await snakeApi.GetSnakes();
     return response;
 });
+
+app.Run();
+
+public interface ISnakeApi
+{
+    [Get("/snakes")]
+    Task<List<SnakeModel>> GetSnakes();
+}
+
+
+public class SnakeModel
+{
+    public int Id { get; set; }
+    public string ImageUrl { get; set; }
+    public string MMName { get; set; }
+    public string EngName { get; set; }
+    public string Detail { get; set; }
+    public string IsPoison { get; set; }
+    public string IsDanger { get; set; }
+}
+
 
 //internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 //{

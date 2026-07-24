@@ -21,7 +21,7 @@ namespace ZYTDotNetCore.Domain.Features.Blog
 
         public List<TblBlog> GetBlogs()
         {
-            var blogList = _db.TblBlogs.AsNoTracking().ToList();
+            var blogList = _db.TblBlogs.Where(x => x.DeleteFlage == false).ToList();
             return blogList;
         }
         public TblBlog GetBlogById(int blogId)

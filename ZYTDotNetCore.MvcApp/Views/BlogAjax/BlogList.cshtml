@@ -1,0 +1,55 @@
+﻿@model List<TblBlog>
+
+<a href="/Blogs/Create" class="btn btn-outline-primary">New</a>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>No.</th>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Content</th>
+		</tr>
+	</thead>
+	<tbody id="tbDataTable">
+		
+	</tbody>
+</table>
+
+@section Scripts{
+	<script>
+		$(document).ready(function(){
+			loadData();
+		});
+
+		function loadData()
+		{
+			$.ajax({
+				url: "/BlogAjax/List",
+				type: "GET",
+				success: function(response){
+					for(let i = 0; i < response.length; i++)
+					{
+						let blogItem = response[i];
+						let tr = `<tr>
+									<td>
+										<a href="/Blogs/Edit/${blogItem.BlogId}" class="btn btn-primary">Edit</a>
+										<a href="/Blogs/Delete/${blogItem.BlogId}" class="btn btn-primary">Delete</a>
+									</td>
+									<td>${i+1}</td>
+									<td>${blogItem.BlogTitle}</td>
+									<td>${blogItem.BlogAuthor}</td>
+									<td>${blogItem.BlogContent}</td>
+								</tr>
+						`;
+
+					}
+				},
+				error: function(error){
+					console.log(error);
+				}
+			});
+		}
+	</script>
+}

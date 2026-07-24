@@ -117,6 +117,7 @@ namespace ZYTDotNetCore.RestApi.Controllers
             conn.Close();
             return Ok(recordCount == 1 ? "Record inserted successfully." : "Record inserted failed.");
         }
+
         [HttpPut("{blogId}")]
         public IActionResult UpdateBlogs(int blogId, BlogViewModel blogViewModel)
         {

@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.ConsoleApp1",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.REST_API_2", "ZYTDotNetCore.REST_API_2\ZYTDotNetCore.REST_API_2.csproj", "{2382CCDC-3AEB-4018-8CCC-153581C07A34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.REST_API_3", "ZYTDotNetCore.REST_API_3\ZYTDotNetCore.REST_API_3.csproj", "{3BB97035-9B6C-4894-92DD-B5463C605C47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.MvcApp", "ZYTDotNetCore.MvcApp\ZYTDotNetCore.MvcApp.csproj", "{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +84,14 @@ Global
 		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2382CCDC-3AEB-4018-8CCC-153581C07A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB97035-9B6C-4894-92DD-B5463C605C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB97035-9B6C-4894-92DD-B5463C605C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB97035-9B6C-4894-92DD-B5463C605C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB97035-9B6C-4894-92DD-B5463C605C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

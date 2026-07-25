@@ -37,7 +37,7 @@
 									let tr = `<tr>
 												<td>
 													<a href="/BlogAjax/Edit/${blogItem.BlogId}" class="btn btn-primary">Edit</a>
-													<button type="button" class="btn btn-primary btnDelete">Delete</a>
+													<button type="button" data-id = "${blogItem.BlogId}" class="btn btn-primary btnDelete">Delete</a>
 												</td>
 												<td>${i + 1}</td>
 												<td>${blogItem.BlogTitle}</td>
@@ -46,11 +46,41 @@
 											</tr>`;
 									$('#tbDataTable').append(tr);
 								}
+								bindDeleteBtn();
 							},
 							error: function(error){
 								console.log(error);
 							}
 				});
+		}
+
+		function bindDeleteBtn()
+		{
+			$('.btnDelete').click(function(){
+				const id = $(this).data('id');
+				$.ajax({
+							url: "/BlogAjax/Delete",
+							type: "POST",
+							data: {
+								Id: id
+							},
+							success: function(response){
+								console.log({response});
+								if(!response.IsSuccess)
+								{
+									alert(response.Message);
+									return;
+								}
+
+								alert(response.Message);
+								location.href = "/BlogAjax";
+
+							},
+							error: function(error){
+								console.log(error);
+							}
+				});
+			});
 		}
 	</script>
 }

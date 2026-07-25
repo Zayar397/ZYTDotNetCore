@@ -72,21 +72,27 @@ namespace ZYTDotNetCore.MvcApp.Controllers
             public bool IsSuccess { get; set; }
             public string Message { get; set; }
         }
+        [HttpPost]
         [ActionName("Delete")]
-        public IActionResult BlogDelete(int id)
+        public IActionResult BlogDelete(BlogRequestModel requestModel)
         {
+            MessageModel model;
             try
             {
-                _blogService.DeleteBlog(id);
+                _blogService.DeleteBlog(requestModel.Id);
                 TempData["IsSuccess"] = true;
                 TempData["Message"] = "Record deleted successfully.";
+
+                model = new MessageModel(true, "Record deleted successfully.");
             }
             catch (Exception ex)
             {
                 TempData["IsSuccess"] = false;
                 TempData["Message"] = ex.ToString();
+
+                model = new MessageModel(false, ex.ToString());
             }
-            return RedirectToAction("Index");
+            return Json(model);
         }
         [ActionName("Edit")]
         public IActionResult BlogEdit(int id)

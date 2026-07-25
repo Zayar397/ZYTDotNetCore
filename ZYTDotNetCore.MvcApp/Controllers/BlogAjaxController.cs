@@ -31,26 +31,46 @@ namespace ZYTDotNetCore.MvcApp.Controllers
         }
         [HttpPost]
         [ActionName("Save")]
-        public IActionResult BlogSave(BlogRequestModel model)
+        public IActionResult BlogSave(BlogRequestModel requestModel)
         {
+            MessageModel model;
             try
             {
                 _blogService.CreateBlog(new Database.Models.TblBlog
                 {
-                    BlogTitle = model.Title,
-                    BlogAuthor = model.Author,
-                    BlogContent = model.Content
+                    BlogTitle = requestModel.Title,
+                    BlogAuthor = requestModel.Author,
+                    BlogContent = requestModel.Content
                 });
 
                 TempData["IsSuccess"] = true;
                 TempData["Message"] = "Record created successfully.";
+
+                model = new MessageModel(true, "Record created successfully.");
             }
             catch (Exception ex)
             {
                 TempData["IsSuccess"] = false;
                 TempData["Message"] = ex.ToString();
+
+                model = new MessageModel(false, ex.ToString());
             }
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(model);
+        }
+        public class MessageModel
+        {
+            public MessageModel()
+            {
+
+            }
+            public MessageModel(bool isSuccess, string message)
+            {
+                IsSuccess = isSuccess;
+                Message = message;
+            }
+            public bool IsSuccess { get; set; }
+            public string Message { get; set; }
         }
         [ActionName("Delete")]
         public IActionResult BlogDelete(int id)
@@ -83,26 +103,31 @@ namespace ZYTDotNetCore.MvcApp.Controllers
         }
         [HttpPost]
         [ActionName("Update")]
-        public IActionResult BlogUpdate(int id, BlogRequestModel model)
+        public IActionResult BlogUpdate(int id, BlogRequestModel requestModel)
         {
+            MessageModel model;
             try
             {
                 _blogService.UpdateBlog(id, new Database.Models.TblBlog
                 {
-                    BlogTitle = model.Title,
-                    BlogAuthor = model.Author,
-                    BlogContent = model.Content
+                    BlogTitle = requestModel.Title,
+                    BlogAuthor = requestModel.Author,
+                    BlogContent = requestModel.Content
                 });
 
                 TempData["IsSuccess"] = true;
                 TempData["Message"] = "Record updated successfully.";
+
+                model = new MessageModel(true, "Record updated successfully.");
             }
             catch (Exception ex)
             {
                 TempData["IsSuccess"] = false;
                 TempData["Message"] = ex.ToString();
+
+                model = new MessageModel(false, ex.ToString());
             }
-            return RedirectToAction("Index");
+            return Json(model);
         }
     }
 }

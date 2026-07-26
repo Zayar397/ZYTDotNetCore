@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.REST_API_3", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.MvcApp", "ZYTDotNetCore.MvcApp\ZYTDotNetCore.MvcApp.csproj", "{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZYTDotNetCore.ChartWebApp", "ZYTDotNetCore.ChartWebApp\ZYTDotNetCore.ChartWebApp.csproj", "{2479F111-65D9-42EA-9A0A-2F5B0704EED6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ED7B229-49DA-48FF-9E0A-9B419CE31FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2479F111-65D9-42EA-9A0A-2F5B0704EED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2479F111-65D9-42EA-9A0A-2F5B0704EED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2479F111-65D9-42EA-9A0A-2F5B0704EED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2479F111-65D9-42EA-9A0A-2F5B0704EED6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

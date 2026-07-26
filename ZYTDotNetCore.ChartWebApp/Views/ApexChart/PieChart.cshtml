@@ -1,0 +1,44 @@
+﻿<div id="chart"></div>
+
+@section Scripts{
+	<script>
+                var options = {
+          series: [42, 23, 15, 12, 8],
+          chart: {
+            width: 480,
+            type: 'pie',
+          },
+          labels: ['Organic Search', 'Direct', 'Social', 'Referral', 'Email'],
+          title: {
+            text: 'Website Traffic by Source',
+            align: 'center',
+          },
+          legend: {
+            show: false,
+          },
+          plotOptions: {
+            pie: {
+              dataLabels: {
+                external: {
+                  show: true,
+                },
+              },
+            },
+          },
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 320,
+                },
+              },
+            },
+          ],
+        }
+
+        var chart = new ApexCharts(document.querySelector('#chart'), options)
+        chart.render()
+
+	</script>
+}
